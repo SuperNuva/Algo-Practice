@@ -1,0 +1,29 @@
+// Write a function that determines whether an input string has balanced brackets.
+
+// You are given an input string consisting of brackets—square [ ], round ( ), and curly { }. The input string can include other text. Write a function that returns either true if the brackets in the input string are balanced or false if they are not. Balanced means that any opening bracket of a particular type must also have a closing bracket of the same type.
+
+// An empty input string or a string without brackets can also be considered "balanced".
+
+// hasBalancedBrackets('[][(){}'); // false
+// hasBalancedBrackets('({)}'); // false
+// hasBalancedBrackets('({[]})'); // true
+// hasBalancedBrackets('text ( is allowed ){rwwrwrrww [] ()}'); // true
+
+// O(n) in n is the length of the str
+function hasBalancedBrackets(str) {
+  let brackets = {
+    "(" : 0,
+    "{" : 0,
+    "[" : 0
+  }
+  for(let i = 0; i < str.length; i++) {
+    if(brackets[str[i]] >= 0) brackets[str[i]]++
+    if(str[i] === ")") brackets["("]--
+    if(str[i] === "}") brackets["{"]--
+    if(str[i] === "]") brackets["["]--
+  }
+  for(let bracket in brackets) {
+    if(brackets[bracket] !== 0) return false
+  }
+  return true
+}
